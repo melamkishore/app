@@ -12,6 +12,11 @@ pipeline {
                 git branch: 'main', credentialsId: 'pythonapp', url: 'https://github.com/melamkishore/app.git'
             }
         }
+        stage('ContDeployment') {
+            steps
+            {
+                sh 'scp /home/ubuntu/.jenkins/workspace/python/webapp/target/webapp.war ubuntu@172.31.42.33:/var/lib/tomcat9/webapps/qaenv.war '
+            }
         stage('Test') {
             steps {
                 echo 'The job has been tested'
